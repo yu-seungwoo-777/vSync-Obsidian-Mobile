@@ -19,4 +19,4 @@ Pull via Obsidian Git plugin to get the latest version.
 
 ## Current Version
 
-**0.2.0**
+**0.2.4**
