@@ -1,22 +1,28 @@
 # vSync Mobile
 
-Obsidian iOS/Android - Obsidian Git Plugin Install
+Obsidian iOS/Android 플러그인 저장소
 
-## Install (Obsidian Git Plugin)
+## 설치 (Obsidian Git Plugin)
 
-1. Install [Obsidian Git](https://obsidian.md/plugins?id=obsidian-git) plugin
-2. Settings - Obsidian Git - Custom clone URL:
+1. [Obsidian Git](https://obsidian.md/plugins?id=obsidian-git) 플러그인 설치
+2. Obsidian Git 설정 - Custom clone URL:
    ```
    https://github.com/yu-seungwoo-777/vSync-Obsidian-Mobile.git
    ```
-3. Clone to: `.obsidian/plugins/vsync/`
-4. Restart Obsidian
-5. Enable vSync in Community Plugins
+3. Obsidian Git으로 clone → `.obsidian/plugins/vsync/` 구조 자동 생성
+4. Obsidian 재시동
+5. 커뮤니티 플러그인에서 vSync 활성화
 
-## Update
+## 수동 설치
 
-Pull via Obsidian Git plugin to get the latest version.
+1. Release에서 main.js, manifest.json, styles.css 다운로드
+2. 볼트의 .obsidian/plugins/vsync/ 폴더에 복사
+3. Obsidian 재시동 후 vSync 활성화
 
-## Current Version
+## 업데이트
 
-**0.2.5**
+Obsidian Git에서 Pull로 최신 버전 적용
+
+## 현재 버전
+
+**0.2.6**

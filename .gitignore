@@ -1,0 +1,5 @@
+# Obsidian 설정 (플러그인 제외)
+.obsidian/*
+!.obsidian/plugins/
+.obsidian/plugins/*
+!.obsidian/plugins/vsync/
