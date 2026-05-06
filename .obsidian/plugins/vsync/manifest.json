@@ -1,10 +1,10 @@
 {
-	"id": "vsync",
-	"name": "vSync",
-	"version": "0.2.31",
-	"minAppVersion": "1.0.0",
-	"description": "Sync with Vector server",
-	"author": "yu",
-	"authorUrl": "",
-	"isDesktopOnly": false
+  "id": "vsync",
+  "name": "vSync",
+  "version": "1.0.2",
+  "minAppVersion": "1.0.0",
+  "description": "Synchronize your Obsidian vault with Vector server",
+  "author": "vector",
+  "authorUrl": "https://github.com/vector/vector",
+  "isDesktopOnly": false
 }
