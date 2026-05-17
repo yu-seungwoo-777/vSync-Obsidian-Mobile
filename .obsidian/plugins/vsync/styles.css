@@ -1,1 +1,541 @@
 /* vSync Plugin Styles */
+
+/* ── Design Tokens (REQ-MU-001) ───────────────────── */
+
+:root {
+	/* Spacing Tokens */
+	--vmodal-px: 20px;
+	--vmodal-py: 16px;
+	--vmodal-grid-gap: 8px;
+	--vmodal-item-py: 12px;
+	--vmodal-btn-py: 10px;
+	--vmodal-icon-gap: 6px;
+
+	/* Layout Tokens */
+	--vmodal-list-max: min(500px, 60vh);
+	--vmodal-diff-max: min(600px, 70vh);
+	--vmodal-content-max: min(80vh, 600px);
+
+	/* Touch Targets (REQ-MU-004) */
+	--vmodal-touch-target: 44px;
+
+	/* Color Tokens (REQ-MU-002) */
+	--vmodal-text: var(--text-normal);
+	--vmodal-bg: var(--background-primary);
+	--vmodal-border: var(--background-modifier-border);
+	--vmodal-accent: var(--interactive-accent);
+	--vmodal-hover: var(--background-modifier-hover);
+	--vmodal-secondary: var(--background-secondary);
+
+	/* Diff Color Tokens */
+	--vmodal-diff-removed-bg: rgba(var(--color-red-rgb), 0.12);
+	--vmodal-diff-removed-text: var(--text-error);
+	--vmodal-diff-added-bg: rgba(var(--color-green-rgb), 0.12);
+	--vmodal-diff-added-text: var(--text-success);
+}
+
+/* ── 공통 (Shared) ────────────────────────────── */
+
+.conflict-list-modal,
+.conflict-diff-modal {
+	/* Local variables replaced with design tokens */
+	padding: var(--vmodal-py) var(--vmodal-px);
+}
+
+/* ConflictListModal ──────────────────────────── */
+
+.conflict-list-modal {
+	padding: 0;
+}
+
+.conflict-list-desc {
+	padding: var(--vmodal-py) var(--vmodal-px) 0;
+	color: var(--text-muted);
+	font-size: var(--font-ui-small);
+	margin-bottom: var(--vmodal-grid-gap);
+}
+
+/* 충돌 목록 (REQ-MU-003: Responsive Height) */
+.conflict-list {
+	margin-bottom: 0;
+	max-height: var(--vmodal-list-max);
+	overflow-y: auto;
+}
+
+.conflict-list .setting-item {
+	cursor: pointer;
+	padding: var(--vmodal-item-py) var(--vmodal-px);
+}
+
+/* 드롭다운 포커스 테두리 잘림 방지 */
+.conflict-list .setting-item-control {
+	flex: none;
+	padding: var(--vmodal-icon-gap);
+	margin: -6px;
+	overflow: visible;
+}
+
+/* 하단 버튼 영역 (REQ-MU-002: Obsidian Variables) */
+.conflict-list-modal > .setting-item:last-child {
+	padding: var(--vmodal-py) var(--vmodal-px);
+	border-top: 1px solid var(--vmodal-border);
+}
+
+/* 공통 바이너리 배지 (REQ-MU-002: Obsidian Variables) */
+.file-binary-badge {
+	font-size: var(--font-ui-smaller);
+	font-weight: 500;
+	padding: 1px 6px;
+	border-radius: var(--input-radius, 4px);
+	background-color: var(--vmodal-border);
+	color: var(--text-muted);
+	margin-left: var(--vmodal-icon-gap);
+}
+
+/* 공통 파일 리스트 아이템 (REQ-MU-002: Obsidian Variables) */
+.file-list-item {
+	border: none;
+	outline: none;
+	box-shadow: none;
+	border-radius: 0;
+}
+
+.file-list-item + .file-list-item {
+	border-top: 1px solid var(--vmodal-border);
+}
+
+/* 공통 숨김 스크롤바 */
+.hidden-scrollbar {
+	scrollbar-width: none;
+	-ms-overflow-style: none;
+}
+
+.hidden-scrollbar::-webkit-scrollbar {
+	display: none;
+}
+
+/* 공통 스크롤바 스타일 */
+.sync-approval-file-list::-webkit-scrollbar,
+.conflict-list::-webkit-scrollbar,
+.conflict-diff-panel::-webkit-scrollbar {
+	width: 8px;
+}
+
+.sync-approval-file-list::-webkit-scrollbar-thumb,
+.conflict-list::-webkit-scrollbar-thumb,
+.conflict-diff-panel::-webkit-scrollbar-thumb {
+	background: var(--scrollbar-thumb-bg);
+	border-radius: var(--input-radius, 4px);
+}
+
+/* 인라인 스타일 대체 클래스 (REQ-MU-003: Responsive Height) */
+.mobile-scroll-container {
+	max-height: var(--vmodal-content-max);
+	overflow-y: auto;
+	-webkit-overflow-scrolling: touch;
+}
+
+.mobile-keyboard-spacer { height: 40vh; }
+.clipboard-fallback-textarea { position: fixed; opacity: 0; }
+
+/* ConflictDiffModal ──────────────────────────── */
+
+.conflict-diff-modal {
+	padding: var(--vmodal-py) var(--vmodal-px);
+}
+
+.conflict-diff-path {
+	font-size: var(--font-ui-small);
+	color: var(--text-muted);
+	margin-bottom: var(--size-4-3);
+}
+
+.conflict-diff-server-date { color: var(--text-faint); }
+
+.conflict-diff-binary-notice {
+	color: var(--text-muted);
+	padding: var(--size-4-2) 0;
+}
+
+.conflict-diff-container {
+	display: flex;
+	gap: 0;
+	border: 1px solid var(--vmodal-border);
+	border-radius: var(--input-radius, 8px);
+	overflow: hidden;
+	margin-bottom: var(--size-4-2);
+}
+
+.conflict-diff-panel-container {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	min-width: 0;
+	border-right: 1px solid var(--vmodal-border);
+}
+
+.conflict-diff-panel-container:last-child {
+	border-right: none;
+}
+
+.conflict-diff-panel-header {
+	padding: var(--size-4-4) var(--size-4-2);
+	background-color: var(--vmodal-secondary);
+	font-weight: 500;
+	font-size: 0.8em;
+	border-bottom: 1px solid var(--vmodal-border);
+	text-align: center;
+	color: var(--text-muted);
+}
+
+.conflict-diff-panel {
+	flex: 1;
+	overflow-y: auto;
+	max-height: var(--vmodal-diff-max);
+	padding: var(--size-4-2);
+	font-family: var(--font-monospace);
+	font-size: 0.85em;
+	line-height: 1.6;
+	white-space: pre-wrap;
+	word-break: break-all;
+	background-color: var(--vmodal-bg);
+}
+
+.conflict-diff-warning {
+	padding: 8px 12px;
+	background-color: var(--background-modifier-warning);
+	border-left: 3px solid var(--color-warning);
+	margin-bottom: 8px;
+	font-size: 0.85em;
+	font-family: var(--font-default);
+}
+
+.conflict-diff-removed {
+	background-color: var(--vmodal-diff-removed-bg);
+	color: var(--vmodal-diff-removed-text);
+	border-radius: 3px;
+	padding: 0 4px;
+}
+
+.conflict-diff-added {
+	background-color: var(--vmodal-diff-added-bg);
+	color: var(--vmodal-diff-added-text);
+	border-radius: 3px;
+	padding: 0 4px;
+}
+
+.conflict-diff-unchanged { color: var(--text-muted); }
+
+/* ── 모바일 반응형 (REQ-MU-004: .is-phone Support) ───── */
+
+.is-phone {
+	--vmodal-px: 16px;
+	--vmodal-py: 12px;
+	--vmodal-item-py: 10px;
+	--vmodal-btn-py: 8px;
+}
+
+.is-phone .conflict-list .setting-item,
+.is-phone .sync-approval-file-list .setting-item {
+	flex-direction: column;
+	align-items: stretch;
+}
+
+.is-phone .conflict-list .setting-item-info,
+.is-phone .sync-approval-file-list .setting-item-info {
+	margin-bottom: var(--vmodal-grid-gap);
+}
+
+.is-phone .conflict-list .setting-item-control,
+.is-phone .sync-approval-file-list .setting-item-control {
+	padding: var(--size-4-3);
+	margin: 0 calc(var(--size-4-3) * -1) calc(var(--size-4-3) * -1);
+	justify-content: center;
+	display: flex;
+}
+
+.is-phone .conflict-diff-panel {
+	max-height: min(300px, 50vh);
+	font-size: 0.78em;
+}
+
+/* REQ-MU-011: 탭 뷰 스타일 (모바일) */
+.vmodal-tabs {
+	display: flex;
+	gap: 0;
+	border-bottom: 1px solid var(--vmodal-border);
+	margin-bottom: 12px;
+}
+
+.vmodal-tab {
+	flex: 1;
+	padding: var(--vmodal-btn-py) var(--vmodal-px);
+	border: none;
+	background: var(--vmodal-secondary);
+	color: var(--text-muted);
+	font-size: 0.85em;
+	font-weight: 500;
+	cursor: pointer;
+	text-align: center;
+	transition: all 0.15s ease;
+	min-height: var(--vmodal-touch-target);
+}
+
+.vmodal-tab-active {
+	background: var(--vmodal-accent);
+	color: var(--text-on-accent);
+}
+
+.vmodal-tab-content {
+	position: relative;
+	min-height: 200px;
+}
+
+.vmodal-hidden {
+	display: none;
+}
+
+/* ── ShareModal ──────────────────────────────── */
+
+.share-modal {
+	padding: 0;
+	container-type: inline-size;
+}
+
+.share-doc-info .setting-item-description {
+	font-weight: 600;
+	color: var(--text-normal);
+	font-size: var(--font-ui-medium);
+}
+
+.share-desc {
+	padding: 0 var(--size-4-2) 12px;
+	color: var(--text-muted);
+	font-size: var(--font-ui-small);
+}
+
+/* 만료 시간 4열 버튼 (REQ-MU-005: Container Query Support) */
+.share-expiry-row {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	gap: var(--vmodal-grid-gap);
+	padding: 0 var(--size-4-2) 20px;
+}
+
+.share-expiry-btn {
+	padding: var(--vmodal-btn-py) 0;
+	border: 1px solid var(--vmodal-border);
+	border-radius: var(--input-radius, 6px);
+	background: var(--vmodal-bg);
+	color: var(--text-muted);
+	font-size: 0.9em;
+	font-weight: 600;
+	letter-spacing: 0.02em;
+	cursor: pointer;
+	transition: all 0.15s ease;
+	text-align: center;
+}
+
+.share-expiry-btn:hover {
+	background: var(--vmodal-secondary);
+	color: var(--text-normal);
+}
+.share-expiry-btn.is-active {
+	background: var(--vmodal-accent);
+	color: var(--text-on-accent);
+	border-color: var(--vmodal-accent);
+}
+
+/* REQ-MU-005: Container Queries */
+.vtree-container { container-type: inline-size; }
+@container (max-width: 400px) { .share-expiry-row { grid-template-columns: repeat(2, 1fr); } }
+@container (max-width: 360px) {
+	.vtree-file-item { flex-direction: column; align-items: flex-start; }
+	.vtree-action-select { margin-left: 0; margin-top: 4px; width: 100%; }
+}
+
+/* 결과 페이즈: 링크 입력란 */
+.share-link-input {
+	font-family: var(--font-monospace);
+	font-size: var(--font-ui-small);
+	cursor: pointer;
+}
+
+/* SyncApprovalModal ───────────────────────────── */
+
+.sync-approval-modal {
+	padding: 0;
+}
+
+.sync-approval-desc {
+	padding: var(--size-4-2) var(--vmodal-px) 0;
+	color: var(--text-muted);
+	font-size: var(--font-ui-small);
+	margin-bottom: var(--vmodal-grid-gap);
+}
+
+.sync-approval-warning {
+	padding: var(--size-4-3) var(--vmodal-px);
+	color: var(--text-warning);
+	font-size: var(--font-ui-small);
+	background: var(--background-warning);
+}
+
+.sync-approval-file-list {
+	max-height: var(--vmodal-diff-max);
+	overflow-y: auto;
+}
+
+/* REQ-MU-010: 모바일 파일 목록 싱글 컬럼 레이아웃 */
+.is-phone .sync-approval-file-list .setting-item {
+	flex-direction: column;
+	align-items: stretch;
+}
+
+.is-phone .sync-approval-file-list .setting-item-info {
+	margin-bottom: var(--vmodal-grid-gap);
+}
+
+.is-phone .sync-approval-file-list .setting-item-control {
+	width: 100%;
+}
+
+.is-phone .sync-approval-file-list select {
+	width: 100%;
+	min-height: var(--vmodal-touch-target);
+}
+
+.sync-approval-file-list::-webkit-scrollbar {
+	width: 8px;
+}
+
+.sync-approval-file-list::-webkit-scrollbar-thumb {
+	background: var(--scrollbar-thumb-bg);
+	border-radius: var(--input-radius, 4px);
+}
+
+/* ── 파일 트리 (REQ-MU-020~024) ───────────── */
+
+/* 깊이 기반 들여쓰기 (REQ-MU-024) */
+.vtree-folder-header,
+.vtree-file-item {
+	padding-left: calc(var(--vtree-depth, 0) * 1px);
+}
+
+.vtree-folder-header {
+	display: flex;
+	align-items: center;
+	padding: 8px var(--vmodal-px);
+	cursor: pointer;
+	position: sticky;
+	top: 0;
+	z-index: 1;
+	background-color: var(--vmodal-secondary);
+	border-bottom: 1px solid var(--vmodal-border);
+	font-size: var(--font-ui-small);
+	font-weight: 500;
+	color: var(--text-muted);
+	min-height: var(--vmodal-touch-target);
+}
+
+.vtree-toggle { margin-right: var(--vmodal-icon-gap); font-size: 0.8em; flex-shrink: 0; }
+.vtree-checkbox { margin-right: 8px; flex-shrink: 0; }
+
+.vtree-checkbox:indeterminate { opacity: 0.6; }
+
+.vtree-file-item {
+	display: flex;
+	align-items: center;
+	padding: 8px var(--vmodal-px);
+	border-top: 1px solid var(--vmodal-border);
+}
+
+.vtree-file-info { flex: 1; min-width: 0; }
+.vtree-file-name { font-weight: 500; }
+.vtree-file-meta { font-size: var(--font-ui-small); color: var(--text-muted); }
+.vtree-action-select { margin-left: 8px; }
+
+/* 트리 버튼 행 (REQ-MU-021) */
+.vtree-button-row {
+	display: flex;
+	gap: 8px;
+	padding: 0 var(--vmodal-px) 8px;
+}
+
+.vtree-expand-btn,
+.vtree-collapse-btn {
+	padding: 4px 8px;
+	font-size: var(--font-ui-small);
+}
+
+.vtree-folder-name { flex: 1; }
+
+/* SPEC-MODAL-ARCH-001: Conflict file visual distinction */
+.vtree-conflict-item {
+	border-left: 3px solid var(--vmodal-diff-removed-bg);
+	padding-left: calc(var(--vmodal-icon-gap) - 3px);
+}
+
+.vtree-file-icon {
+	flex-shrink: 0;
+	display: inline-flex;
+	align-items: center;
+	margin-right: var(--vmodal-icon-gap);
+	color: var(--text-muted);
+}
+
+.vtree-conflict-item .vtree-file-icon {
+	color: var(--text-error);
+}
+
+/* SPEC-MODAL-ARCH-001: Filter hidden state */
+.vtree-file-item.vtree-hidden,
+.vtree-container .vtree-hidden {
+	display: none;
+}
+
+/* SPEC-MODAL-ARCH-001: Filter bar */
+.sync-filter-bar {
+	display: flex;
+	gap: var(--vmodal-grid-gap);
+	margin-bottom: var(--vmodal-grid-gap);
+}
+
+.sync-filter-btn {
+	padding: var(--vmodal-btn-py) var(--vmodal-px);
+	border: 1px solid var(--vmodal-border);
+	border-radius: var(--vmodal-radius);
+	background: var(--vmodal-bg);
+	color: var(--vmodal-text);
+	cursor: pointer;
+	transition: var(--vmodal-transition);
+}
+
+.sync-filter-btn:hover {
+	background: var(--vmodal-hover);
+}
+
+.sync-filter-btn.is-active {
+	background: var(--vmodal-accent);
+	color: var(--text-on-accent);
+	border-color: var(--vmodal-accent);
+}
+
+/* REQ-MU-012: 모바일 2열 그리드 폴백 */
+.is-phone .share-expiry-row {
+	grid-template-columns: repeat(2, 1fr);
+}
+
+/* REQ-MU-031: 모바일 터치 타겟 (44px) */
+.is-phone .vtree-folder-header,
+.is-phone .vtree-file-item,
+.is-phone .share-expiry-btn,
+.is-phone .vmodal-tab,
+.is-phone .conflict-diff-modal .setting-item button,
+.is-phone .vtree-action-select {
+	min-height: var(--vmodal-touch-target);
+}
+.is-phone .share-expiry-btn {
+	font-size: 0.85em;
+}
+
