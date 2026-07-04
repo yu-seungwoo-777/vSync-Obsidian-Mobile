@@ -1,95 +1,58 @@
 /* vSync Plugin Styles */
 
-/* ── Design Tokens (REQ-MU-001) ───────────────────── */
-
-:root {
-	/* Spacing Tokens */
-	--vmodal-px: 20px;
-	--vmodal-py: 16px;
-	--vmodal-grid-gap: 8px;
-	--vmodal-item-py: 12px;
-	--vmodal-btn-py: 10px;
-	--vmodal-icon-gap: 6px;
-
-	/* Layout Tokens */
-	--vmodal-list-max: min(500px, 60vh);
-	--vmodal-diff-max: min(600px, 70vh);
-	--vmodal-content-max: min(80vh, 600px);
-
-	/* Touch Targets (REQ-MU-004) */
-	--vmodal-touch-target: 44px;
-
-	/* Color Tokens (REQ-MU-002) */
-	--vmodal-text: var(--text-normal);
-	--vmodal-bg: var(--background-primary);
-	--vmodal-border: var(--background-modifier-border);
-	--vmodal-accent: var(--interactive-accent);
-	--vmodal-hover: var(--background-modifier-hover);
-	--vmodal-secondary: var(--background-secondary);
-
-	/* Diff Color Tokens */
-	--vmodal-diff-removed-bg: rgba(var(--color-red-rgb), 0.12);
-	--vmodal-diff-removed-text: var(--text-error);
-	--vmodal-diff-added-bg: rgba(var(--color-green-rgb), 0.12);
-	--vmodal-diff-added-text: var(--text-success);
-}
-
 /* ── 공통 (Shared) ────────────────────────────── */
 
+/* .conflict-diff-modal — padding moved to UnoCSS p-4 in TSX */
+
+/* ConflictListModal / SyncResolutionModal ─────── */
+
 .conflict-list-modal,
-.conflict-diff-modal {
-	/* Local variables replaced with design tokens */
-	padding: var(--vmodal-py) var(--vmodal-px);
-}
-
-/* ConflictListModal ──────────────────────────── */
-
-.conflict-list-modal {
+.sync-resolution-modal {
 	padding: 0;
 }
 
 .conflict-list-desc {
-	padding: var(--vmodal-py) var(--vmodal-px) 0;
+	padding: 16px 20px 0;
 	color: var(--text-muted);
-	font-size: var(--font-ui-small);
-	margin-bottom: var(--vmodal-grid-gap);
+	font-size: var(--font-ui-small, 0.85em);
+	margin-bottom: 8px;
 }
 
 /* 충돌 목록 (REQ-MU-003: Responsive Height) */
 .conflict-list {
 	margin-bottom: 0;
-	max-height: var(--vmodal-list-max);
+	max-height: min(500px, 60vh);
 	overflow-y: auto;
 }
 
 .conflict-list .setting-item {
 	cursor: pointer;
-	padding: var(--vmodal-item-py) var(--vmodal-px);
+	padding: 12px 20px;
 }
 
 /* 드롭다운 포커스 테두리 잘림 방지 */
 .conflict-list .setting-item-control {
 	flex: none;
-	padding: var(--vmodal-icon-gap);
+	padding: 6px;
 	margin: -6px;
 	overflow: visible;
 }
 
 /* 하단 버튼 영역 (REQ-MU-002: Obsidian Variables) */
 .conflict-list-modal > .setting-item:last-child {
-	padding: var(--vmodal-py) var(--vmodal-px);
-	border-top: 1px solid var(--vmodal-border);
+	padding: 16px 20px;
+	border-top: 1px solid var(--background-modifier-border);
 }
 
 /* 공통 바이너리 배지 (REQ-MU-002: Obsidian Variables) */
 .file-binary-badge {
-	font-size: var(--font-ui-smaller);
+	font-size: var(--font-ui-smaller, 0.8em);
 	font-weight: 500;
 	padding: 1px 6px;
-	border-radius: var(--input-radius, 4px);
-	background-color: var(--vmodal-border);
+	border-radius: 4px;
+	background-color: var(--background-modifier-border);
 	color: var(--text-muted);
-	margin-left: var(--vmodal-icon-gap);
+	margin-left: 6px;
 }
 
 /* 공통 파일 리스트 아이템 (REQ-MU-002: Obsidian Variables) */
@@ -101,7 +64,7 @@
 }
 
 .file-list-item + .file-list-item {
-	border-top: 1px solid var(--vmodal-border);
+	border-top: 1px solid var(--background-modifier-border);
 }
 
 /* 공통 숨김 스크롤바 */
@@ -125,12 +88,12 @@
 .conflict-list::-webkit-scrollbar-thumb,
 .conflict-diff-panel::-webkit-scrollbar-thumb {
 	background: var(--scrollbar-thumb-bg);
-	border-radius: var(--input-radius, 4px);
+	border-radius: 4px;
 }
 
 /* 인라인 스타일 대체 클래스 (REQ-MU-003: Responsive Height) */
 .mobile-scroll-container {
-	max-height: var(--vmodal-content-max);
+	max-height: min(80vh, 600px);
 	overflow-y: auto;
 	-webkit-overflow-scrolling: touch;
 }
@@ -140,30 +103,30 @@
 
 /* ConflictDiffModal ──────────────────────────── */
 
-.conflict-diff-modal {
-	padding: var(--vmodal-py) var(--vmodal-px);
-}
+/* .conflict-diff-modal — padding moved to UnoCSS p-4 in TSX */
 
 .conflict-diff-path {
-	font-size: var(--font-ui-small);
+	font-size: var(--font-ui-small, 0.85em);
 	color: var(--text-muted);
-	margin-bottom: var(--size-4-3);
+	margin-bottom: 8px;
 }
 
 .conflict-diff-server-date { color: var(--text-faint); }
 
 .conflict-diff-binary-notice {
 	color: var(--text-muted);
-	padding: var(--size-4-2) 0;
+	padding: 4px 0;
 }
 
 .conflict-diff-container {
 	display: flex;
 	gap: 0;
-	border: 1px solid var(--vmodal-border);
-	border-radius: var(--input-radius, 8px);
+	border: 1px solid var(--background-modifier-border);
+	border-top: none;
+	border-radius: 0 0 4px 4px;
 	overflow: hidden;
-	margin-bottom: var(--size-4-2);
+	margin-bottom: 4px;
+	container-type: inline-size;
 }
 
 .conflict-diff-panel-container {
@@ -171,7 +134,7 @@
 	display: flex;
 	flex-direction: column;
 	min-width: 0;
-	border-right: 1px solid var(--vmodal-border);
+	border-right: 1px solid var(--background-modifier-border);
 }
 
 .conflict-diff-panel-container:last-child {
@@ -179,26 +142,66 @@
 }
 
 .conflict-diff-panel-header {
-	padding: var(--size-4-4) var(--size-4-2);
-	background-color: var(--vmodal-secondary);
+	padding: 16px 4px;
+	background-color: var(--background-secondary);
 	font-weight: 500;
-	font-size: 0.8em;
-	border-bottom: 1px solid var(--vmodal-border);
+	font-size: var(--font-ui-smaller, 0.8em);
+	border-bottom: 1px solid var(--background-modifier-border);
 	text-align: center;
 	color: var(--text-muted);
+	flex: 1;
+}
+
+/* 헤더 행 - 두 헤더를 가로로 배치 */
+.conflict-diff-headers-row {
+	display: flex;
+	border: 1px solid var(--background-modifier-border);
+	border-bottom: none;
+	border-radius: 4px 4px 0 0;
+	overflow: hidden;
+}
+
+/* 모바일에서 헤더 클릭 활성화 (기본) */
+.conflict-diff-headers-row .conflict-diff-panel-header {
+	cursor: pointer;
+	-webkit-tap-highlight-color: transparent;
+	transition: background-color 0.15s ease;
+}
+
+/* 모바일에서 활성 탭 헤더 강조 */
+.conflict-diff-headers-row .conflict-diff-panel-header.tab-active {
+	background-color: var(--interactive-accent);
+	color: var(--text-on-accent);
+}
+
+.conflict-diff-headers-row .conflict-diff-panel-header:active {
+	background-color: var(--background-modifier-hover);
+}
+
+/* 데스크톱(넓은 화면)에서 헤더 클릭 비활성화, 활성 강조 제거 */
+@container (min-width: 600px) {
+	.conflict-diff-headers-row .conflict-diff-panel-header {
+		pointer-events: none;
+		cursor: default;
+	}
+
+	.conflict-diff-headers-row .conflict-diff-panel-header.tab-active {
+		background-color: var(--background-secondary);
+		color: var(--text-normal);
+	}
 }
 
 .conflict-diff-panel {
 	flex: 1;
 	overflow-y: auto;
-	max-height: var(--vmodal-diff-max);
-	padding: var(--size-4-2);
+	max-height: min(600px, 70vh);
+	padding: 4px;
 	font-family: var(--font-monospace);
-	font-size: 0.85em;
+	font-size: var(--font-ui-small, 0.85em);
 	line-height: 1.6;
 	white-space: pre-wrap;
 	word-break: break-all;
-	background-color: var(--vmodal-bg);
+	background-color: var(--background-primary);
 }
 
 .conflict-diff-warning {
@@ -206,34 +209,27 @@
 	background-color: var(--background-modifier-warning);
 	border-left: 3px solid var(--color-warning);
 	margin-bottom: 8px;
-	font-size: 0.85em;
+	font-size: var(--font-ui-small, 0.85em);
 	font-family: var(--font-default);
 }
 
 .conflict-diff-removed {
-	background-color: var(--vmodal-diff-removed-bg);
-	color: var(--vmodal-diff-removed-text);
-	border-radius: 3px;
+	background-color: rgba(var(--color-red-rgb, 255, 53, 53), 0.12);
+	color: var(--text-error);
+	border-radius: 4px;
 	padding: 0 4px;
 }
 
 .conflict-diff-added {
-	background-color: var(--vmodal-diff-added-bg);
-	color: var(--vmodal-diff-added-text);
-	border-radius: 3px;
+	background-color: rgba(var(--color-green-rgb, 25, 115, 0), 0.12);
+	color: var(--text-success);
+	border-radius: 4px;
 	padding: 0 4px;
 }
 
 .conflict-diff-unchanged { color: var(--text-muted); }
 
 /* ── 모바일 반응형 (REQ-MU-004: .is-phone Support) ───── */
-
-.is-phone {
-	--vmodal-px: 16px;
-	--vmodal-py: 12px;
-	--vmodal-item-py: 10px;
-	--vmodal-btn-py: 8px;
-}
 
 .is-phone .conflict-list .setting-item,
 .is-phone .sync-approval-file-list .setting-item {
@@ -243,13 +239,13 @@
 
 .is-phone .conflict-list .setting-item-info,
 .is-phone .sync-approval-file-list .setting-item-info {
-	margin-bottom: var(--vmodal-grid-gap);
+	margin-bottom: 8px;
 }
 
 .is-phone .conflict-list .setting-item-control,
 .is-phone .sync-approval-file-list .setting-item-control {
-	padding: var(--size-4-3);
-	margin: 0 calc(var(--size-4-3) * -1) calc(var(--size-4-3) * -1);
+	padding: 8px;
+	margin: 0 -8px -8px;
 	justify-content: center;
 	display: flex;
 }
@@ -259,30 +255,52 @@
 	font-size: 0.78em;
 }
 
+/* 모바일 헤더 클릭 피드백 */
+.is-phone .conflict-diff-panel-header:active {
+	background-color: var(--background-modifier-hover);
+}
+
+/* Mobile column header override */
+.is-phone .sync-resolution-colhead {
+	padding: 4px 16px;
+	min-height: 44px;
+	cursor: pointer;
+}
+
+.is-phone .sync-resolution-colhead .sync-resolution-colhead-toggle {
+	background: transparent;
+	background-color: transparent;
+	border: none;
+	box-shadow: none;
+	height: auto;
+	min-height: unset;
+}
+
 /* REQ-MU-011: 탭 뷰 스타일 (모바일) */
-.vmodal-tabs {
-	display: flex;
+/* Default hidden — @container overrides to display:flex on mobile */
+.conflict-diff-tab-nav {
+	display: none;
 	gap: 0;
-	border-bottom: 1px solid var(--vmodal-border);
+	border-bottom: 1px solid var(--background-modifier-border);
 	margin-bottom: 12px;
 }
 
 .vmodal-tab {
 	flex: 1;
-	padding: var(--vmodal-btn-py) var(--vmodal-px);
+	padding: 10px 20px;
 	border: none;
-	background: var(--vmodal-secondary);
+	background: var(--background-secondary);
 	color: var(--text-muted);
-	font-size: 0.85em;
+	font-size: var(--font-ui-small, 0.85em);
 	font-weight: 500;
 	cursor: pointer;
 	text-align: center;
 	transition: all 0.15s ease;
-	min-height: var(--vmodal-touch-target);
+	min-height: 44px;
 }
 
 .vmodal-tab-active {
-	background: var(--vmodal-accent);
+	background: var(--interactive-accent);
 	color: var(--text-on-accent);
 }
 
@@ -308,25 +326,25 @@
 	font-size: var(--font-ui-medium);
 }
 
-.share-desc {
-	padding: 0 var(--size-4-2) 12px;
+.share-modal-desc {
+	padding: 0 4px 12px;
 	color: var(--text-muted);
-	font-size: var(--font-ui-small);
+	font-size: var(--font-ui-small, 0.85em);
 }
 
 /* 만료 시간 4열 버튼 (REQ-MU-005: Container Query Support) */
 .share-expiry-row {
 	display: grid;
 	grid-template-columns: repeat(4, 1fr);
-	gap: var(--vmodal-grid-gap);
-	padding: 0 var(--size-4-2) 20px;
+	gap: 8px;
+	padding: 0 4px 20px;
 }
 
 .share-expiry-btn {
-	padding: var(--vmodal-btn-py) 0;
-	border: 1px solid var(--vmodal-border);
-	border-radius: var(--input-radius, 6px);
-	background: var(--vmodal-bg);
+	padding: 10px 0;
+	border: 1px solid var(--background-modifier-border);
+	border-radius: var(--input-radius, 8px);
+	background: var(--background-primary);
 	color: var(--text-muted);
 	font-size: 0.9em;
 	font-weight: 600;
@@ -337,13 +355,13 @@
 }
 
 .share-expiry-btn:hover {
-	background: var(--vmodal-secondary);
+	background: var(--background-modifier-hover);
 	color: var(--text-normal);
 }
 .share-expiry-btn.is-active {
-	background: var(--vmodal-accent);
+	background: var(--interactive-accent);
 	color: var(--text-on-accent);
-	border-color: var(--vmodal-accent);
+	border-color: var(--interactive-accent);
 }
 
 /* REQ-MU-005: Container Queries */
@@ -351,14 +369,15 @@
 @container (max-width: 400px) { .share-expiry-row { grid-template-columns: repeat(2, 1fr); } }
 @container (max-width: 360px) {
 	.vtree-file-item { flex-direction: column; align-items: flex-start; }
-	.vtree-action-select { margin-left: 0; margin-top: 4px; width: 100%; }
+	.sync-resolution-modal .vtree-file-item { grid-template-columns: 1fr; }
 }
 
 /* 결과 페이즈: 링크 입력란 */
 .share-link-input {
 	font-family: var(--font-monospace);
-	font-size: var(--font-ui-small);
+	font-size: var(--font-ui-small, 0.85em);
 	cursor: pointer;
+	user-select: all;
 }
 
 /* SyncApprovalModal ───────────────────────────── */
@@ -368,21 +387,21 @@
 }
 
 .sync-approval-desc {
-	padding: var(--size-4-2) var(--vmodal-px) 0;
+	padding: 4px 20px 0;
 	color: var(--text-muted);
-	font-size: var(--font-ui-small);
-	margin-bottom: var(--vmodal-grid-gap);
+	font-size: var(--font-ui-small, 0.85em);
+	margin-bottom: 8px;
 }
 
 .sync-approval-warning {
-	padding: var(--size-4-3) var(--vmodal-px);
+	padding: 8px 20px;
 	color: var(--text-warning);
-	font-size: var(--font-ui-small);
+	font-size: var(--font-ui-small, 0.85em);
 	background: var(--background-warning);
 }
 
 .sync-approval-file-list {
-	max-height: var(--vmodal-diff-max);
+	max-height: min(600px, 70vh);
 	overflow-y: auto;
 }
 
@@ -393,7 +412,7 @@
 }
 
 .is-phone .sync-approval-file-list .setting-item-info {
-	margin-bottom: var(--vmodal-grid-gap);
+	margin-bottom: 8px;
 }
 
 .is-phone .sync-approval-file-list .setting-item-control {
@@ -402,90 +421,137 @@
 
 .is-phone .sync-approval-file-list select {
 	width: 100%;
-	min-height: var(--vmodal-touch-target);
-}
-
-.sync-approval-file-list::-webkit-scrollbar {
-	width: 8px;
-}
-
-.sync-approval-file-list::-webkit-scrollbar-thumb {
-	background: var(--scrollbar-thumb-bg);
-	border-radius: var(--input-radius, 4px);
+	min-height: 44px;
 }
 
 /* ── 파일 트리 (REQ-MU-020~024) ───────────── */
 
-/* 깊이 기반 들여쓰기 (REQ-MU-024) */
-.vtree-folder-header,
-.vtree-file-item {
-	padding-left: calc(var(--vtree-depth, 0) * 1px);
-}
+/* 깊이 기반 들여쓰기 (REQ-MU-024)
+ * padding shorthand 이후에 padding-left를 calc로 재설정해야 깊이가 반영됨
+ * 각 컴포넌트 규칙에서 padding-left: calc(var(--vtree-depth) + base) 사용 */
 
 .vtree-folder-header {
-	display: flex;
+	display: grid;
+	grid-template-columns: auto minmax(0, 1fr) auto auto;
 	align-items: center;
-	padding: 8px var(--vmodal-px);
+	gap: 0 6px;
+	padding: 8px 20px;
+	padding-left: calc(var(--vtree-depth, 0px) + 20px);
 	cursor: pointer;
 	position: sticky;
 	top: 0;
 	z-index: 1;
-	background-color: var(--vmodal-secondary);
-	border-bottom: 1px solid var(--vmodal-border);
-	font-size: var(--font-ui-small);
+	background-color: var(--background-secondary);
+	border-bottom: 1px solid var(--background-modifier-border);
+	font-size: var(--font-ui-small, 0.85em);
 	font-weight: 500;
 	color: var(--text-muted);
-	min-height: var(--vmodal-touch-target);
+	min-height: 44px;
 }
 
-.vtree-toggle { margin-right: var(--vmodal-icon-gap); font-size: 0.8em; flex-shrink: 0; }
+.vtree-toggle {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 12px;
+	height: 12px;
+	margin-right: 6px;
+	flex-shrink: 0;
+}
 .vtree-checkbox { margin-right: 8px; flex-shrink: 0; }
+
+.vtree-checkbox-right {
+	justify-self: end;
+}
 
 .vtree-checkbox:indeterminate { opacity: 0.6; }
 
 .vtree-file-item {
 	display: flex;
 	align-items: center;
-	padding: 8px var(--vmodal-px);
-	border-top: 1px solid var(--vmodal-border);
+	padding: 8px 20px;
+	padding-left: calc(var(--vtree-depth, 0px) + 20px);
+	border-top: 1px solid var(--background-modifier-border);
+	transition: all 0.15s ease;
 }
 
-.vtree-file-info { flex: 1; min-width: 0; }
-.vtree-file-name { font-weight: 500; }
-.vtree-file-meta { font-size: var(--font-ui-small); color: var(--text-muted); }
-.vtree-action-select { margin-left: 8px; }
-
-/* 트리 버튼 행 (REQ-MU-021) */
-.vtree-button-row {
-	display: flex;
-	gap: 8px;
-	padding: 0 var(--vmodal-px) 8px;
+/* Grid layout for sync-resolution modal file items */
+.sync-resolution-modal .vtree-file-item {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) auto auto;
+	align-items: center;
+	gap: 0 10px;
+	padding: 8px 20px;
+	padding-left: calc(var(--vtree-depth, 0px) + 20px);
+	font-size: var(--font-ui-small, 0.85em);
+	min-height: 44px;
 }
 
-.vtree-expand-btn,
-.vtree-collapse-btn {
-	padding: 4px 8px;
-	font-size: var(--font-ui-small);
+/* 폴더 헤더도 동일 간격 유지 */
+.sync-resolution-modal .vtree-folder-header {
+	gap: 0 6px;
 }
 
-.vtree-folder-name { flex: 1; }
-
-/* SPEC-MODAL-ARCH-001: Conflict file visual distinction */
-.vtree-conflict-item {
-	border-left: 3px solid var(--vmodal-diff-removed-bg);
-	padding-left: calc(var(--vmodal-icon-gap) - 3px);
+/* Inner grid: icon | name | meta | badge */
+.sync-resolution-modal .vtree-file-info {
+	display: grid;
+	grid-template-columns: auto minmax(0, 1fr) auto auto;
+	align-items: center;
+	gap: 0 6px;
+	min-width: 0;
 }
+
+/* Remove flex-era margins — gap handles spacing */
+.sync-resolution-modal .vtree-checkbox,
+.sync-resolution-modal .vtree-file-icon,
+.sync-resolution-modal .vtree-folder-icon {
+	margin-right: 0;
+}
+
+.vtree-file-item:hover {
+	background: var(--background-modifier-hover);
+}
+
+.vtree-file-info { flex: 1; min-width: 0; display: flex; align-items: center; }
+.vtree-file-name { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.vtree-file-meta { font-size: var(--font-ui-small, 0.85em); color: var(--text-muted); flex-shrink: 0; }
+
+.vtree-folder-name { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
 
 .vtree-file-icon {
 	flex-shrink: 0;
 	display: inline-flex;
 	align-items: center;
-	margin-right: var(--vmodal-icon-gap);
+	margin-right: 6px;
 	color: var(--text-muted);
 }
 
+.vtree-toggle svg {
+	width: 12px;
+	height: 12px;
+}
+
+.vtree-file-icon svg {
+	width: 16px;
+	height: 16px;
+}
+
+.vtree-folder-icon {
+	flex-shrink: 0;
+	display: inline-flex;
+	align-items: center;
+	margin-right: 6px;
+	color: var(--text-muted);
+}
+
+.vtree-folder-icon svg {
+	width: 16px;
+	height: 16px;
+}
+
 .vtree-conflict-item .vtree-file-icon {
-	color: var(--text-error);
+	color: var(--text-muted);
 }
 
 /* SPEC-MODAL-ARCH-001: Filter hidden state */
@@ -497,28 +563,30 @@
 /* SPEC-MODAL-ARCH-001: Filter bar */
 .sync-filter-bar {
 	display: flex;
-	gap: var(--vmodal-grid-gap);
-	margin-bottom: var(--vmodal-grid-gap);
+	gap: 8px;
+	padding: 0 var(--size-4-1);
+	margin-bottom: 16px;
 }
 
 .sync-filter-btn {
-	padding: var(--vmodal-btn-py) var(--vmodal-px);
-	border: 1px solid var(--vmodal-border);
-	border-radius: var(--vmodal-radius);
-	background: var(--vmodal-bg);
-	color: var(--vmodal-text);
+	padding: 10px 20px;
+	border: 1px solid var(--background-modifier-border);
+	border-radius: var(--radius-s, 4px);
+	background: var(--background-primary);
+	color: var(--text-normal);
 	cursor: pointer;
-	transition: var(--vmodal-transition);
+	transition: all 0.15s ease;
+	min-height: 36px;
 }
 
 .sync-filter-btn:hover {
-	background: var(--vmodal-hover);
+	background: var(--background-modifier-hover);
 }
 
 .sync-filter-btn.is-active {
-	background: var(--vmodal-accent);
+	background: var(--interactive-accent);
 	color: var(--text-on-accent);
-	border-color: var(--vmodal-accent);
+	border-color: var(--interactive-accent);
 }
 
 /* REQ-MU-012: 모바일 2열 그리드 폴백 */
@@ -532,10 +600,487 @@
 .is-phone .share-expiry-btn,
 .is-phone .vmodal-tab,
 .is-phone .conflict-diff-modal .setting-item button,
-.is-phone .vtree-action-select {
-	min-height: var(--vmodal-touch-target);
+.is-phone .share-modal button,
+.is-phone .conflict-diff-modal button,
+.is-phone .sync-resolution-modal button:not(.sync-resolution-colhead-toggle),
+.is-phone .clickable-icon,
+.is-phone .sync-filter-btn,
+.is-phone .vtree-expand-btn,
+.is-phone .vtree-collapse-btn {
+	min-height: 44px;
 }
 .is-phone .share-expiry-btn {
-	font-size: 0.85em;
+	font-size: var(--font-ui-small, 0.85em);
 }
 
+/* ── 추가 CSS 클래스 정의 ──────────────────────── */
+
+/* 통합 동기화 토글 버튼 (settings-tab.ts) */
+.vault-btn-sync {
+	color: var(--text-success);
+	font-size: var(--font-ui-smaller, 0.8em);
+	cursor: pointer;
+	transition: all 0.15s ease;
+}
+
+.vault-btn-resume {
+	color: var(--text-warning);
+	font-size: var(--font-ui-smaller, 0.8em);
+	cursor: pointer;
+	transition: all 0.15s ease;
+}
+
+.vault-btn-disconnected {
+	color: var(--text-muted);
+	font-size: var(--font-ui-smaller, 0.8em);
+	cursor: default;
+	opacity: 0.7;
+}
+
+/* SyncResolutionModal ────────────────────────── */
+
+/* server-deleted 전용 커스텀 헤더 */
+.sync-resolution-head {
+	padding: 16px 20px 12px;
+	border-bottom: 1px solid var(--background-modifier-border);
+}
+
+.sync-resolution-head-title {
+	font-size: var(--font-ui-small);
+	font-weight: 500;
+	color: var(--text-normal);
+	margin: 0 0 4px;
+}
+
+.sync-resolution-head-desc {
+	font-size: var(--font-ui-smaller, 0.8em);
+	color: var(--text-muted);
+	margin: 0;
+}
+
+/* 동기화 해결 설명 (sync-resolution-modal.ts) */
+.sync-resolution-title {
+	padding: 0 var(--size-4-1);
+}
+
+.sync-resolution-desc {
+	color: var(--text-muted);
+	font-size: var(--font-ui-smaller, 0.8em);
+	padding: 0 var(--size-4-1) 16px;
+}
+
+/* 컬럼 헤더 행 */
+.sync-resolution-colhead {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	padding: 6px 20px;
+	border-bottom: 1px solid var(--background-modifier-border);
+	background-color: var(--background-secondary);
+	flex-shrink: 0;
+}
+
+.sync-resolution-colhead .sync-resolution-colhead-toggle {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	appearance: none;
+	-webkit-appearance: none;
+	background: transparent;
+	background-color: transparent;
+	border: none;
+	outline: none;
+	box-shadow: none;
+	cursor: pointer;
+	color: var(--text-muted);
+	padding: 0;
+	height: auto;
+	flex-shrink: 0;
+	transition: all 0.15s ease;
+}
+
+.sync-resolution-colhead .sync-resolution-colhead-toggle:hover {
+	color: var(--text-normal);
+}
+
+.sync-resolution-colhead .sync-resolution-colhead-toggle svg {
+	width: 14px;
+	height: 14px;
+}
+
+.sync-resolution-file-list.vtree-list-collapsed {
+	display: none;
+}
+
+.sync-resolution-col-label {
+	font-size: var(--font-ui-smaller, 0.8em);
+	color: var(--text-muted);
+	flex: 1;
+}
+
+.sync-resolution-col-status {
+	font-size: var(--font-ui-smaller, 0.8em);
+	color: var(--text-muted);
+	text-align: right;
+}
+
+/* SyncResolutionModal 파일 목록 */
+.sync-resolution-file-list {
+	max-height: min(500px, 60vh);
+	overflow-y: auto;
+}
+
+/* REQ-SR-005: Clean Footer — flex-wrap으로 경고/버튼 행 분리 */
+.sync-resolution-footer {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 8px;
+	padding: 16px var(--size-4-1);
+	border-top: 1px solid var(--background-modifier-border);
+}
+
+.sync-footer-btn {
+	font-size: var(--font-ui-small);
+	padding: var(--size-4-1) var(--size-4-3);
+	height: var(--input-height);
+	cursor: pointer;
+	border: 0;
+	background-color: var(--interactive-normal);
+	color: var(--text-normal);
+	transition: all 0.15s ease;
+	font-weight: var(--font-normal);
+	user-select: none;
+	white-space: nowrap;
+}
+
+/* 스코프 선택자로 모바일 Obsidian 오버라이드 방지 */
+.sync-resolution-modal .sync-footer-btn,
+.conflict-diff-modal .sync-footer-btn {
+	border-radius: var(--radius-s, 4px);
+}
+
+.sync-footer-btn:hover {
+	background-color: var(--interactive-hover);
+	border-color: var(--background-modifier-border-hover);
+}
+
+/* 스코프 선택자로 Obsidian 기본 .mod-cta 덮어쓰기 방지 */
+.sync-resolution-modal .sync-footer-btn.mod-cta {
+	background-color: var(--interactive-accent);
+	color: var(--text-on-accent, white);
+	border-color: var(--interactive-accent);
+}
+
+.sync-resolution-modal .sync-footer-btn.mod-cta:hover {
+	background-color: var(--interactive-accent-hover);
+	border-color: var(--interactive-accent-hover);
+}
+
+/* SyncResolutionModal 푸터 구분선 */
+.sync-resolution-modal > .setting-item:last-child {
+	padding: 16px 20px;
+	border-top: 1px solid var(--background-modifier-border);
+}
+
+/* ConflictDiffModal 푸터 구분선 (contentEl 패딩이 이미 있으므로 패딩 추가 안함) */
+.conflict-diff-modal > .setting-item:last-child {
+	border-top: 1px solid var(--background-modifier-border);
+}
+
+/* REQ-SR-004: Compact Mode - 단일 폴더 + 단일 충돌 유형일 때 간소화된 레이아웃 */
+.sync-resolution-file-list.vtree-compact .vtree-folder-header {
+	display: none;
+}
+
+.sync-resolution-file-list.vtree-compact .vtree-file-item {
+	--vtree-depth: 0;
+}
+
+.sync-resolution-file-list.vtree-compact .vtree-file-meta {
+	max-height: 0;
+	overflow: hidden;
+	transition: max-height 0.15s ease;
+}
+
+.sync-resolution-file-list.vtree-compact .vtree-file-item:hover .vtree-file-meta {
+	max-height: 100px;
+}
+
+.sync-resolution-modal .vtree-file-meta {
+	display: none;
+}
+
+/* ── Custom Checkbox Styles (Reference Design) ───────────────── */
+
+.vtree-checkbox {
+	appearance: none;
+	-webkit-appearance: none;
+	width: 16px;
+	height: 16px;
+	border-radius: 4px;
+	border: 1.5px solid var(--background-modifier-border);
+	background: transparent;
+	cursor: pointer;
+	transition: all 0.15s ease;
+	position: relative;
+	flex-shrink: 0;
+}
+
+.vtree-checkbox:checked {
+	background: var(--interactive-accent);
+	border-color: var(--interactive-accent);
+}
+
+.vtree-checkbox:checked::after {
+	content: '✓';
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	color: var(--text-on-accent);
+	font-size: 10px;
+	line-height: 1;
+}
+
+.vtree-checkbox:indeterminate {
+	background: var(--background-secondary);
+	border-color: var(--background-modifier-border);
+}
+
+.vtree-checkbox:indeterminate::after {
+	content: '−';
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	color: var(--text-muted);
+	font-size: 10px;
+	line-height: 1;
+}
+
+/* ── Status Badge Styles ──────────────────────────────────────── */
+
+.vtree-status-badge {
+	font-size: var(--font-ui-smaller, 0.8em);
+	padding: 2px 7px;
+	border-radius: 4px;
+	white-space: nowrap;
+	flex-shrink: 0;
+}
+
+/* Grid 셀 내 배지 우측 정렬 */
+.sync-resolution-modal .vtree-status-badge {
+	justify-self: end;
+}
+
+.vtree-status-keep {
+	background: rgba(var(--color-green-rgb, 25, 115, 0), 0.12);
+	color: var(--text-success);
+}
+
+.vtree-status-delete {
+	background: rgba(var(--color-red-rgb, 255, 53, 53), 0.12);
+	color: var(--text-error);
+}
+
+.vtree-status-info {
+	background: var(--background-secondary);
+	color: var(--text-muted);
+}
+
+/* ── Delete Item Visual Feedback ───────────────────────────────── */
+
+.vtree-delete-item {
+	background: rgba(var(--color-red-rgb, 255, 53, 53), 0.06);
+}
+
+.vtree-delete-item:hover {
+	background: rgba(var(--color-red-rgb, 255, 53, 53), 0.10);
+}
+
+.vtree-delete-item .vtree-file-name {
+	color: var(--text-muted);
+	text-decoration: line-through;
+}
+
+.vtree-delete-item .vtree-file-icon {
+	color: rgba(var(--color-red-rgb, 255, 53, 53), 0.4);
+}
+
+/* ── Footer Warning Bar ────────────────────────────────────────── */
+
+.sync-resolution-warn {
+	display: flex;
+	align-items: flex-start;
+	gap: 0px;
+	background: var(--background-modifier-warning);
+	border: 1px solid var(--color-warning);
+	border-radius: 6px;
+	padding: 7px 0px;
+	margin-bottom: 0;
+	font-size: var(--font-ui-smaller, 0.8em);
+	color: var(--text-warning);
+	flex-basis: 100%;
+}
+
+.sync-resolution-warn-icon {
+	flex-shrink: 0;
+	color: var(--color-warning);
+}
+
+/* ── Footer Summary Text ───────────────────────────────────────── */
+
+.sync-resolution-summary {
+	flex: 1;
+	min-width: 0;
+	font-size: var(--font-ui-smaller, 0.8em);
+	color: var(--text-muted);
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.sync-resolution-summary b {
+	color: var(--text-normal);
+	font-weight: 500;
+}
+
+.sync-resolution-summary .sync-summary-delete {
+	color: var(--text-error);
+}
+
+/* ── ConflictDiffModal @container Responsive (SPEC-MODAL-ARCH-002) ───── */
+
+/* Mobile: 탭 뷰 전환 — 400px 이하에서만 활성화 (Obsidian 모달 ~540px) */
+@container (max-width: 400px) {
+	/* 탭 네비게이션 표시 */
+	.conflict-diff-tab-nav {
+		display: flex;
+	}
+
+	/* 패널들을 세로로 정렬 */
+	.conflict-diff-panels {
+		flex-direction: column;
+	}
+
+	/* 비활성 탭의 패널 숨김 */
+	.conflict-diff-panel-container.server-panel:not(.tab-active) {
+		display: none;
+	}
+
+	.conflict-diff-panel-container.local-panel:not(.tab-active) {
+		display: none;
+	}
+
+	/* 활성 탭의 패널 표시 */
+	.conflict-diff-panel-container.server-panel.tab-active,
+	.conflict-diff-panel-container.local-panel.tab-active {
+		display: flex;
+	}
+
+	/* 모바일에서 패널 높이 제한 */
+	.conflict-diff-panel {
+		max-height: min(300px, 50vh);
+		font-size: 0.78em;
+	}
+}
+
+/* Mobile: .is-phone fallback (Obsidian native mobile detection) */
+.is-phone .conflict-diff-tab-nav {
+	display: flex;
+}
+
+.is-phone .conflict-diff-panels {
+	flex-direction: column;
+}
+
+.is-phone .conflict-diff-panel-container.server-panel:not(.tab-active),
+.is-phone .conflict-diff-panel-container.local-panel:not(.tab-active) {
+	display: none;
+}
+
+.is-phone .conflict-diff-panel-container.server-panel.tab-active,
+.is-phone .conflict-diff-panel-container.local-panel.tab-active {
+	display: flex;
+}
+
+.is-phone .conflict-diff-panel {
+	max-height: min(300px, 50vh);
+	font-size: 0.78em;
+}
+
+/* UnoCSS Utilities */
+/* layer: preflights */
+*,::before,::after{--un-rotate:0;--un-rotate-x:0;--un-rotate-y:0;--un-rotate-z:0;--un-scale-x:1;--un-scale-y:1;--un-scale-z:1;--un-skew-x:0;--un-skew-y:0;--un-translate-x:0;--un-translate-y:0;--un-translate-z:0;--un-pan-x: ;--un-pan-y: ;--un-pinch-zoom: ;--un-scroll-snap-strictness:proximity;--un-ordinal: ;--un-slashed-zero: ;--un-numeric-figure: ;--un-numeric-spacing: ;--un-numeric-fraction: ;--un-border-spacing-x:0;--un-border-spacing-y:0;--un-ring-offset-shadow:0 0 rgb(0 0 0 / 0);--un-ring-shadow:0 0 rgb(0 0 0 / 0);--un-shadow-inset: ;--un-shadow:0 0 rgb(0 0 0 / 0);--un-ring-inset: ;--un-ring-offset-width:0px;--un-ring-offset-color:#fff;--un-ring-width:0px;--un-ring-color:rgb(147 197 253 / 0.5);--un-blur: ;--un-brightness: ;--un-contrast: ;--un-drop-shadow: ;--un-grayscale: ;--un-hue-rotate: ;--un-invert: ;--un-saturate: ;--un-sepia: ;--un-backdrop-blur: ;--un-backdrop-brightness: ;--un-backdrop-contrast: ;--un-backdrop-grayscale: ;--un-backdrop-hue-rotate: ;--un-backdrop-invert: ;--un-backdrop-opacity: ;--un-backdrop-saturate: ;--un-backdrop-sepia: ;}::backdrop{--un-rotate:0;--un-rotate-x:0;--un-rotate-y:0;--un-rotate-z:0;--un-scale-x:1;--un-scale-y:1;--un-scale-z:1;--un-skew-x:0;--un-skew-y:0;--un-translate-x:0;--un-translate-y:0;--un-translate-z:0;--un-pan-x: ;--un-pan-y: ;--un-pinch-zoom: ;--un-scroll-snap-strictness:proximity;--un-ordinal: ;--un-slashed-zero: ;--un-numeric-figure: ;--un-numeric-spacing: ;--un-numeric-fraction: ;--un-border-spacing-x:0;--un-border-spacing-y:0;--un-ring-offset-shadow:0 0 rgb(0 0 0 / 0);--un-ring-shadow:0 0 rgb(0 0 0 / 0);--un-shadow-inset: ;--un-shadow:0 0 rgb(0 0 0 / 0);--un-ring-inset: ;--un-ring-offset-width:0px;--un-ring-offset-color:#fff;--un-ring-width:0px;--un-ring-color:rgb(147 197 253 / 0.5);--un-blur: ;--un-brightness: ;--un-contrast: ;--un-drop-shadow: ;--un-grayscale: ;--un-hue-rotate: ;--un-invert: ;--un-saturate: ;--un-sepia: ;--un-backdrop-blur: ;--un-backdrop-brightness: ;--un-backdrop-contrast: ;--un-backdrop-grayscale: ;--un-backdrop-hue-rotate: ;--un-backdrop-invert: ;--un-backdrop-opacity: ;--un-backdrop-saturate: ;--un-backdrop-sepia: ;}
+/* layer: shortcuts */
+.container{width:100%;}
+.vbtn-primary{min-height:44px;cursor:pointer;border-radius:0.25rem;background-color:var(--interactive-accent) /* var(--interactive-accent) */;padding-left:1.25rem;padding-right:1.25rem;padding-top:0.75rem;padding-bottom:0.75rem;color:var(--text-on-accent) /* var(--text-on-accent) */;transition-property:color,background-color,border-color,text-decoration-color,fill,stroke;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms;}
+.vcard{border-width:1px;border-color:var(--background-modifier-border);border-radius:0.25rem;background-color:var(--background-secondary) /* var(--background-secondary) */;padding:0.75rem;}
+.vbtn-primary:hover{opacity:0.9;}
+@media (min-width: 640px){
+.container{max-width:640px;}
+}
+@media (min-width: 768px){
+.container{max-width:768px;}
+}
+@media (min-width: 1024px){
+.container{max-width:1024px;}
+}
+@media (min-width: 1280px){
+.container{max-width:1280px;}
+}
+@media (min-width: 1536px){
+.container{max-width:1536px;}
+}
+/* layer: default */
+.sticky{position:sticky;}
+.grid{display:grid;}
+.grid-cols-4{grid-template-columns:repeat(4,minmax(0,1fr));}
+.mb-1{margin-bottom:0.25rem;}
+.mb-2{margin-bottom:0.5rem;}
+.mt-2{margin-top:0.5rem;}
+.h-10{height:2.5rem;}
+.min-h-\[44px\]{min-height:44px;}
+.flex{display:flex;}
+.flex-1{flex:1 1 0%;}
+.flex-col{flex-direction:column;}
+.cursor-pointer{cursor:pointer;}
+.justify-end{justify-content:flex-end;}
+.gap-2{gap:0.5rem;}
+.gap-4{gap:1rem;}
+.overflow-hidden{overflow:hidden;}
+.break-all{word-break:break-all;}
+.border{border-width:1px;}
+.border-0{border-width:0px;}
+.border-t{border-top-width:1px;}
+.border-\[var\(--background-modifier-border\)\]{border-color:var(--background-modifier-border);}
+.border-\[var\(--interactive-accent\)\]{border-color:var(--interactive-accent);}
+.rounded{border-radius:0.25rem;}
+.bg-\[var\(--background-primary\)\]{background-color:var(--background-primary) /* var(--background-primary) */;}
+.bg-\[var\(--interactive-accent\)\]{background-color:var(--interactive-accent) /* var(--interactive-accent) */;}
+.bg-\[var\(--interactive-normal\)\]{background-color:var(--interactive-normal) /* var(--interactive-normal) */;}
+.hover\:bg-\[var\(--background-modifier-hover\)\]:hover{background-color:var(--background-modifier-hover) /* var(--background-modifier-hover) */;}
+.hover\:bg-\[var\(--interactive-accent-hover\)\]:hover{background-color:var(--interactive-accent-hover) /* var(--interactive-accent-hover) */;}
+.hover\:bg-\[var\(--interactive-hover\)\]:hover{background-color:var(--interactive-hover) /* var(--interactive-hover) */;}
+.p-4{padding:1rem;}
+.px,
+.px-4{padding-left:1rem;padding-right:1rem;}
+.py-2{padding-top:0.5rem;padding-bottom:0.5rem;}
+.pt-2{padding-top:0.5rem;}
+.text-\[0\.85em\]{font-size:0.85em;}
+.text-\[var\(--font-ui-large\)\]{color:var(--font-ui-large) /* var(--font-ui-large) */;}
+.text-\[var\(--font-ui-small\)\]{color:var(--font-ui-small) /* var(--font-ui-small) */;}
+.text-\[var\(--text-muted\)\]{color:var(--text-muted) /* var(--text-muted) */;}
+.text-\[var\(--text-normal\)\]{color:var(--text-normal) /* var(--text-normal) */;}
+.text-\[var\(--text-on-accent\)\]{color:var(--text-on-accent) /* var(--text-on-accent) */;}
+.font-normal{font-weight:400;}
+.font-semibold{font-weight:600;}
+.font-\[var\(--font-monospace\)\]{font-family:var(--font-monospace);}
+.tab{-moz-tab-size:4;-o-tab-size:4;tab-size:4;}
+.disabled\:opacity-50:disabled{opacity:0.5;}
+.filter{filter:var(--un-blur) var(--un-brightness) var(--un-contrast) var(--un-drop-shadow) var(--un-grayscale) var(--un-hue-rotate) var(--un-invert) var(--un-saturate) var(--un-sepia);}
+.transition-all{transition-property:all;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms;}
+.duration-150{transition-duration:150ms;}
+.ease-in-out{transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);}
+.\@container{container-type:inline-size;}
