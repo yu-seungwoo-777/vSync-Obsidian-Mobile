@@ -1,7 +1,7 @@
 {
   "id": "vsync",
   "name": "vSync",
-  "version": "1.0.8",
+  "version": "1.0.13",
   "minAppVersion": "1.0.0",
   "description": "Synchronize your Obsidian vault with Vector server",
   "author": "vector",
